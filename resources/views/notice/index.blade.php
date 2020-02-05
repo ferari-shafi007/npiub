@@ -7,7 +7,6 @@
 <div class="text-center" style='margin-top:100px;'>
 <h1>Notice</h1>
 </div>
-    <main role="main" class="col-md-9 m-sm-auto col-lg-10 px-4">
 
     <table class="notice-table">
         <tr>
@@ -17,24 +16,29 @@
             <td>File</td>
         </tr>
 
-        <% notice.forEach((notice) => { %>
-            <tr>
+@foreach ($notice as $notice)
+
+        <tr>
                 <td>
-                    <%= notice.date %>
+                    {{$notice->created_at}}
                 </td>
                 <td>
-                    <%= notice.bach %>
+                    {{$notice->bach}}
                 </td>
                 <td>
-                    <span class="font-weight-bold"><%= notice.subject %></span>
+                    <span class="font-weight-bold">
+                        {{$notice->noticeHead}}
+                    </span>
                     <p>
-                        <%= notice.noticeBody %>
+                        {{$notice->noticeBody}}
                     </p>
                 </td>
                 <td>
-                    <%if (notice.noticeFile1 != "") { %>
-                        <a href="<%= notice.noticeFile1 %>"><img class="notice-icon" src="/res/img/pdf.png" alt=""></a>
-                        <% } %>
+                    {{-- @if(count($notice > 0) --}}
+
+                        <a href=""><img class="notice-icon" src="/res/img/pdf.png" alt=""></a>
+                    {{-- @endif --}}
+                   <div></div>
                     <%if (notice.noticeFile2 != "") { %>
                         <a href="<%= notice.noticeFile2 %>"><img class="notice-icon" src="/res/img/pdf.png" alt=""></a>
                         <% } %>
@@ -48,12 +52,11 @@
 
                 </td>
             </tr>
-            <%  }); %>
+            @endforeach
 
     </table>
 
 
 
-</main>
 
 @endsection

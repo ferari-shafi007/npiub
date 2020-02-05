@@ -15,9 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/students', function () {
-    return view('students');
-});
+
 
 Route::get('/resume', function () {
     return view('resume');
@@ -26,6 +24,15 @@ Route::get('/resume', function () {
 Route::get('/notice', function () {
     return view('notice');
 });
+
+Route::resource('student', 'StudentController');
+
+Route::resource('lecture', 'lectureController');
+
+Route::resource('bach', 'bachController');
+
+Route::resource('notice', 'noticeController');
+
 
 Auth::routes();
 

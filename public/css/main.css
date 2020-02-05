@@ -64,7 +64,11 @@
      color: #db3056 !important;
      font-family: 'Niconne', cursive;
      font-weight: bold;
-     font-size: 2em;
+ }
+ 
+ .logo img {
+     width: 100px;
+     height: 65px;
  }
  
  .banner {
@@ -79,4 +83,28 @@
      object-fit: cover;
      top: 100;
      left: 0;
+ }
+ 
+ .lectureType select {
+     border-radius: 5px;
+     font-weight: bold;
+     background-color: #db3056;
+     color: #fff;
+ }
+ 
+ .createLecture {
+     margin: 10rem 20rem;
+ }
+ 
+ .createLecture h1,
+ button {
+     text-align: center;
+     justify-content: center;
+ }
+ 
+ .createLecture button {
+     border-radius: 3px;
+     margin-left: 15px;
+     font-weight: bold;
+     font-size: large;
  }

@@ -8,8 +8,8 @@
 
     <div class="container">
       <div class="header-content">
-        <h1>I'm <span class="typed"></span></h1>
-        <p><%=general.tagline%></p>
+        <h1>NPI University Of Bangladesh</h1>
+        <p>Department Of Computer Science And Technology</p>
 
         <ul class="list-unstyled list-social">
           <li><a href="<%=general.facebook%>"><i class="ion-social-facebook"></i></a></li>
@@ -63,7 +63,7 @@
       </div>
     </div>
 
-    <div class="container">
+    {{-- <div class="container">
       <div class="row">
         <div class="col-md-12">
 
@@ -121,7 +121,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
 
   </div>
   <!-- End section portfolio -->

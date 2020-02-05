@@ -8,7 +8,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-         <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i|Playfair+Display:400,400i,700,700i,900,900i" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i|Playfair+Display:400,400i,700,700i,900,900i" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
         <!-- Styles -->
@@ -23,7 +24,7 @@
         {{-- nav bar  --}}
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand logo" href="/">Mahbubur Rahman</a>
+  <a class="navbar-brand logo" href="/"><img src="/images/npi.png"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -42,7 +43,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/#about">Teaching Philosophy</a>
-          <a class="dropdown-item" href="/resume">Resume</a>
+          <a class="dropdown-item" target="_blank" href="/resume">Resume</a>
           <a class="dropdown-item" href="/#portfolio">My Work</a>
 
         </div>
@@ -53,9 +54,9 @@
           Class Activity
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Class Lecture</a>
+            <a class="dropdown-item" href="/lecture">Class Lecture</a>
             <a class="dropdown-item" href="/notice">Notice</a>
-            <a class="dropdown-item" href="/students">Student List</a>
+            <a class="dropdown-item" href="/student">Student List</a>
             <a class="dropdown-item" href="#">Student Gallary</a>
         </div>
       </li>
@@ -84,6 +85,8 @@
     </div>
   </div>
 </nav>
+
+                @include('inc.messages')
 
             @yield('content')
 
