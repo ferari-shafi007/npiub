@@ -19,7 +19,7 @@
 
                     <div class="col-md-4">
                         <label for="validationTooltip02">Lectyure Type</label>
-                        <select type="search" data-table="studentTable" class="form-control required select-table-filter" name="Department" id="department">
+                        <select type="search" data-table="studentTable" class="form-control required select-table-filter" name="caragory" id="department">
                             <option value="Academic">Academic</option>
                             <option value="Training">Training</option>
                         </select>
@@ -30,8 +30,11 @@
                         <label for="validationTooltip02">Semester</label>
 
                         <select class="form-control" name="semester" id="semester" >
-                                <option value="Winter-2017">Winter 2017</option>
-                                <option value="Summer-2017">Summer 2017</option>
+                                @foreach ($semester as $semester)
+
+                            <option value="{{$semester->name}}">{{$semester->name}}</option>
+
+                            @endforeach
 
                         </select>
 
@@ -41,8 +44,10 @@
                     <div class="col-md-4">
                         <label for="validationTooltip02">Subject</label>
                         <select class="form-control required" name="Subject" id="Subject">
-                            <option>CSE-1101 | Structured Programming</option>
-                            <option>CSE-2306 | Object Oriented Programming</option>
+                                    @foreach ($subject as $subject)
+
+                        <option>{{$subject->code}} | {{$subject->name}}</option>
+                            @endforeach
                         </select>
 
                     </div>
@@ -62,7 +67,7 @@
             <td>File</td>
         </tr>
 
-        @foreach ($lectures as $lecture)
+        @foreach ($lecture as $lecture)
 
             <tr>
                 <td>

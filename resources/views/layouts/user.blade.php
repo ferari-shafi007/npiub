@@ -9,11 +9,12 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i|Playfair+Display:400,400i,700,700i,900,900i" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
         <!-- Styles -->
         <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> --}}
         <link rel="stylesheet" href="/css/style-folio.css">
         <link rel="stylesheet" href="/css/dashboard.css">
         <link rel="stylesheet" href="/css/main.css">
@@ -85,8 +86,10 @@
     </div>
   </div>
 </nav>
+<div class="nav-space">
+</div>
 
-                @include('inc.messages')
+            @include('inc.messages')
 
             @yield('content')
 
@@ -109,6 +112,7 @@
 
   <!-- Template Main Javascript File -->
   <script src="/js/main.js"></script>
+  <script src="/js/font-awesome.js"></script>
 </body>
 
 </html>

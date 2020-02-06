@@ -16,6 +16,10 @@ class CreateBachesTable extends Migration
         Schema::create('baches', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->string('bach');
+            $table->string('department');
+            $table->string('session');
+            $table->string('url');
         });
     }
 

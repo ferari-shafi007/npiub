@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Bach;
 use Illuminate\Http\Request;
 
 class bachController extends Controller
@@ -13,7 +14,8 @@ class bachController extends Controller
      */
     public function index()
     {
-        //
+        $bach = Bach::all();
+        return view ('bach.index')->with('baches', $bach);
     }
 
     /**
@@ -34,7 +36,26 @@ class bachController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bach = Bach::all();
+
+        $this->validate($request, [
+            'bach' => 'required',
+            'department' => 'required',
+            'url' => 'required'
+
+        ]);
+
+        // create a new bach
+        $bach = new Bach;
+
+        $bach->bach = $request->input('bach');
+        $bach->department = $request->input('department');
+        $bach->url = $request->input('url');
+        $bach->session = $request->input('session');
+
+        $bach->save();
+
+        return redirect('/bach')->with('success', 'bach Created');
     }
 
     /**

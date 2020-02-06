@@ -20,7 +20,6 @@
 
 <style>
 .messegeShow{
-    margin-top: 100px;
     z-index: 100;
 }
 </style>

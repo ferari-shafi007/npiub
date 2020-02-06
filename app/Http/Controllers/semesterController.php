@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\semester;
 use Illuminate\Http\Request;
 
 class semesterController extends Controller
@@ -13,7 +14,8 @@ class semesterController extends Controller
      */
     public function index()
     {
-        //
+        $semester = semester::all();
+        return view('semester.index')->with('semester', $semester);
     }
 
     /**
@@ -23,7 +25,8 @@ class semesterController extends Controller
      */
     public function create()
     {
-        //
+        $semester = semester::all();
+        return view('semester.create')->with('semester', $semester);
     }
 
     /**
@@ -34,7 +37,21 @@ class semesterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $semester = semester::all();
+
+        $this->validate($request, [
+            'name' => 'required',
+
+        ]);
+
+        $semester = new semester;
+
+        $semester->name = $request->input('name');
+
+
+        $semester->save();
+
+        return redirect('/semester')->with('success', 'Semester Created');
     }
 
     /**

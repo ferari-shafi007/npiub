@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\subject;
+
 use Illuminate\Http\Request;
 
 class subjectController extends Controller
@@ -13,7 +15,8 @@ class subjectController extends Controller
      */
     public function index()
     {
-        //
+        $subject = subject::all();
+        return view('subject.index')->with('subjects', $subject);
     }
 
     /**
@@ -23,8 +26,10 @@ class subjectController extends Controller
      */
     public function create()
     {
-        //
+        $subject = subject::all();
+        return view('subject.create')->with('subjects', $subject);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -34,7 +39,23 @@ class subjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    $subject = subject::all();
+
+    $this->validate($request, [
+        'name' => 'required',
+        'code' => 'required'
+
+    ]);
+
+    // create a new bach
+    $subject = new subject;
+
+    $subject->name = $request->input('name');
+    $subject->code = $request->input('code');
+
+    $subject->save();
+
+    return redirect('/subject')->with('success', 'subject Created');
     }
 
     /**

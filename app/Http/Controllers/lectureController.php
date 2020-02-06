@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Lecture;
+use App\semester;
+use App\subject;
+
 use Illuminate\Http\Request;
 
 
@@ -15,8 +18,16 @@ class lectureController extends Controller
      */
     public function index()
     {
+        $subject = subject::all();
         $lecture = Lecture::all();
-        return view('lecture.index')->with('lectures', $lecture);
+        $semester = semester::all();
+        $data = array(
+            'subject'=>$subject,
+            'lecture'=>$lecture,
+            'semester'=>$semester
+        );
+        // return view('lecture.index')->with('lectures', $lecture);
+        return view('lecture.index')->with($data);
     }
 
     /**
@@ -26,7 +37,16 @@ class lectureController extends Controller
      */
     public function create()
     {
-        return view('lecture.create');
+        $subject = subject::all();
+        $lecture = Lecture::all();
+        $semester = semester::all();
+
+        $data = array(
+            'subject' => $subject,
+            'lecture' => $lecture,
+            'semester' => $semester
+        );
+        return view('lecture.create')->with($data);
 
     }
 
