@@ -65,11 +65,10 @@
      font-family: 'Niconne', cursive;
      font-weight: bold;
  }
- 
- .logo img {
+ /* .logo img {
      width: 100px;
      height: 65px;
- }
+ } */
  
  .banner {
      width: 100%;

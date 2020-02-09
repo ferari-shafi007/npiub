@@ -11,7 +11,7 @@
 
     <div class="col-md-4">
                         <label for="validationTooltip02">Lectyure Type</label>
-                        <select type="search" data-table="studentTable" class="form-control required select-table-filter" name="caragory" id="department">
+                        <select type="search" data-table="studentTable" class="form-control required select-table-filter" name="catagory" id="department">
                             <option value="Academic">Academic</option>
                             <option value="Training">Training</option>
                         </select>
@@ -21,7 +21,7 @@
 
      <div class="col-md-4">
                         <label for="validationTooltip02">Subject</label>
-                        <select class="form-control required" name="Subject" id="Subject">
+                        <select class="form-control required" name="subject" id="Subject">
                          @foreach ($subject as $subject)
 
                             <option value="{{$subject->code}} | {{$subject->name}}">{{$subject->code}} | {{$subject->name}}</option>

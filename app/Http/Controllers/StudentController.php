@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Bach;
+use App\student;
+use App\User;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +22,16 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('student.index');
+        $user = User::all();
+        $student = student::all();
+        $bach = Bach::all();
+
+        $data = array(
+            'student' => $student,
+            'bach' => $bach,
+            'user'=> $user
+        );
+        return view('student.index')->with($data);
     }
 
     /**
@@ -23,7 +41,14 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('student.create');
+        $student = student::all();
+        $bach = Bach::all();
+
+        $data = array(
+            'student' => $student,
+            'bach' => $bach
+        );
+        return view('student.create')->with($data);
     }
 
     /**
@@ -34,7 +59,78 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // firstName
+        // lastName
+        // institute
+        // bach
+        // email
+        // phone
+        // stdId
+        // gender
+        // skill1
+        // skill2
+        // job
+        // city
+        // state
+        // zip
+        // status
+        // url
+        // img
+
+
+        $student = student::all();
+
+        $this->validate($request, [
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'email' => 'required',
+            'stdId' => 'required'
+
+        ]);
+
+        // Handle File Upload
+        if ($request->hasFile('img')) {
+            // Get filename with the extension
+            $filenameWithExt = $request->file('img')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('img')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            // Upload Image
+            $path = $request->file('img')->storeAs('public/student_images', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'avatar.jpg';
+        }
+
+        // create a new bach
+        $student = new student;
+
+        $student->firstName = $request->input('firstName');
+        $student->lastName = $request->input('lastName');
+        $student->institute = $request->input('institute');
+        $student->bach = $request->input('bach');
+        $student->department = $request->input('department');
+        $student->email = $request->input('email');
+        $student->phone = $request->input('phone');
+        $student->stdId = $request->input('stdId');
+        $student->gender = $request->input('gender');
+        $student->skill1 = $request->input('skill1');
+        $student->skill2 = $request->input('skill2');
+        $student->job = $request->input('occupation');
+        $student->city = $request->input('city');
+        $student->state = $request->input('state');
+        $student->zip = $request->input('zip');
+        $student->status = $request->input('status');
+        $student->url = $request->input('url');
+        $student->img = $fileNameToStore;
+
+
+        $student->save();
+
+        return redirect('/student')->with('success', 'Student Created');
     }
 
     /**
@@ -45,7 +141,14 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = student::find($id);
+        $bach = Bach::all();
+
+        $data = array(
+            'student' => $student,
+            'bach' => $bach
+        );
+        return view('student.show')->with($data);
     }
 
     /**
@@ -56,7 +159,15 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student = student::find($id);
+        $bach = Bach::all();
+
+        $data = array(
+            'student' => $student,
+            'bach' => $bach
+        );
+        return view('student.edit')->with($data);
+        // return 'edit page ' . $student->firstName;
     }
 
     /**
@@ -68,7 +179,58 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // update student by id
+        $student = student::find($id);
+
+        $this->validate($request, [
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'email' => 'required',
+            'stdId' => 'required'
+
+        ]);
+
+        // Handle File Upload
+        if ($request->hasFile('img')) {
+            // Get filename with the extension
+            $filenameWithExt = $request->file('img')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('img')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            // Upload Image
+            $path = $request->file('img')->storeAs('public/student_images', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'avatar.jpg';
+        }
+
+
+
+        $student->firstName = $request->input('firstName');
+        $student->lastName = $request->input('lastName');
+        $student->institute = $request->input('institute');
+        $student->bach = $request->input('bach');
+        $student->department = $request->input('department');
+        $student->email = $request->input('email');
+        $student->phone = $request->input('phone');
+        $student->stdId = $request->input('stdId');
+        $student->gender = $request->input('gender');
+        $student->skill1 = $request->input('skill1');
+        $student->skill2 = $request->input('skill2');
+        $student->job = $request->input('occupation');
+        $student->city = $request->input('city');
+        $student->state = $request->input('state');
+        $student->zip = $request->input('zip');
+        $student->status = $request->input('status');
+        $student->url = $request->input('url');
+        $student->img = $fileNameToStore;
+
+
+        $student->save();
+
+        return redirect('/student')->with('success', 'Student - '. $student->firstName . ' '. $student->lastName.' Updated');
     }
 
     /**

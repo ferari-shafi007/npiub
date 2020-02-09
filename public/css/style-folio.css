@@ -233,10 +233,11 @@ nav ul li a {
     float: left;
 }
 
-.logo img {
+
+/* .logo img {
     width: 100px;
     height: 50px;
-}
+} */
 
 .responsive {
     display: none;
@@ -266,7 +267,7 @@ nav ul li a {
     text-align: left;
     width: 100%;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     flex-direction: column;
     z-index: 100;
 }
@@ -276,17 +277,20 @@ nav ul li a {
     font-weight: 700;
     margin-bottom: 10px;
     text-transform: uppercase;
-    color: #000a;
+    color: #000;
+    text-shadow: #fff 0 0 5px;
+    margin-top: 50px;
 }
 
 .header-content p {
-    font-size: 13px;
+    font-size: 20px;
     letter-spacing: 5px;
     margin-top: 0;
     margin-bottom: 30px;
     text-transform: capitalize;
-    color: #000a;
+    color: #000;
     font-weight: 500;
+    text-shadow: #fff 0 0 5px;
 }
 
 .header-content .list-social li {
@@ -665,4 +669,20 @@ nav ul li a {
 
 .credits {
     font-size: 13px;
+}
+
+.status {
+    color: #fff;
+    height: 300px;
+    width: 300px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.statusActive {
+    background-color: #18ff6e;
+}
+
+.statusPassed {
+    background-color: #ff3333;
 }

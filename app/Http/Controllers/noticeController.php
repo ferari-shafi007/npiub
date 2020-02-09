@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Bach;
 use App\Notice;
 use Illuminate\Http\Request;
 
 class NoticeController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +32,14 @@ class NoticeController extends Controller
      */
     public function create()
     {
+        $bach = Bach::all();
         $notice = Notice::all();
-        return view('notice.create')->with('notice', $notice);
+
+        $data = array(
+            'bach' => $bach,
+            'notice' => $notice
+        );
+        return view('notice.create')->with($data);
     }
 
     /**
@@ -39,17 +52,24 @@ class NoticeController extends Controller
     {
         $this->validate($request, [
             'noticeHead' => 'required',
-            'noticeBody' => 'required',
-            'url' => 'required'
+            'noticeBody' => 'required'
         ]);
 
         $newNotice = new Notice;
 
+        $bachData = $request->input('bach');
+
+        $newNotice->bach = $bachData;
+
+
 
         $newNotice->noticeHead = $request->input('noticeHead');
         $newNotice->noticeBody = $request->input('noticeBody');
-        $newNotice->url = $request->input('url');
-        $newNotice->bach = '';
+        $newNotice->url1 = $request->input('url1');
+        $newNotice->url2 = $request->input('url2');
+        $newNotice->url3 = $request->input('url3');
+        $newNotice->url4 = $request->input('url4');
+        // $newNotice->bach = $bachIn;
 
         $newNotice->save();
 
@@ -101,4 +121,45 @@ class NoticeController extends Controller
     {
         //
     }
+
+
+
+    // facebook section
+    public function bot(Request $request)
+    {
+        $data = $request->all();
+        //get the user’s id
+        $id            = $data["entry"][0]["messaging"][0]["sender"]["id"];
+        $senderMessage = $data["entry"][0]["messaging"][0]['message'];
+        if (!empty($senderMessage)) {
+            $this->sendTextMessage($id, "Hi buddy");
+        }
+    }
+
+    private function sendTextMessage($recipientId, $messageText)
+    {
+        $messageData = [
+            "recipient" => [
+                "id" => $recipientId,
+            ],
+            "message"   => [
+                "text" => $messageText,
+            ],
+        ];
+        $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token=' . env("PAGE_ACCESS_TOKEN"));
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/json"]);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($messageData));
+        curl_exec($ch);
+        curl_close($ch);
+    }
+
+
+
+
+
+
+
 }

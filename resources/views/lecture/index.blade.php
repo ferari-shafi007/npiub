@@ -82,12 +82,7 @@
                         {{$lecture->lecture}}
                 </td>
                 <td>
-                        <a href=""><img class="notice-icon" src="/res/img/pdf.png" alt=""></a>
-                        <a href=""><img class="notice-icon" src="/res/img/pdf.png" alt=""></a>
-                        <a href=""><img class="notice-icon" src="/res/img/pdf.png" alt=""></a>
-                        <a href=""><img class="notice-icon" src="/res/img/pdf.png" alt=""></a>
-
-
+                <a href="{{$lecture->url}}"><img class="notice-icon" src="/images/pdf.png"></a>
                 </td>
             </tr>
         @endforeach

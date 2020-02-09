@@ -2,15 +2,9 @@
 
 @section('content')
 
+<div class="container-fluid">
 
-    <main role="main" class="col-md-9 m-sm-auto col-lg-10 px-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Students</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-            </div>
-        </div>
-        <div class="search">
-            <form action="/student/select" method="POST">
+            <form action="/student/select">
                 <div class="row">
                     <div class="col-md-3">
                         <label for="validationTooltip02">Institute</label>
@@ -36,10 +30,11 @@
 
                         <select class="form-control required" name="bach" id="bach" >
 
-                                     <% bach.forEach((bach) => { %>
+                                     @foreach ($bach as $bach)
+                        <option value="{{$bach->bach}}">{{$bach->bach}}</option>
+                                     @endforeach
 
-                                     <option><%=bach.name%></option>
-                                     <%  }); %>
+
                         </select>
 
                     </div>
@@ -59,59 +54,64 @@
 
                 </div>
             </form>
-        </div>
+    </div>
 
+<div class="container-fluid">
+<div class="row">
 
-
-        <table class="table table-hover student-table">
-            <thead>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Students</h4>
+            <p class="card-category"> </p>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                    <th>Status</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Avatar</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    @foreach ($student as $student)
                 <tr>
-                    <th scope="col">Status</th>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Avatar</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% students.forEach((students) => { %>
-                    <tr>
+                <td>{{$student->status}}</td>
+                    <td>{{$student->stdId}}</td>
+                    <td>{{$student->firstName}} {{$student->lastName}}</td>
+                    <td>{{$student->department}}</td>
+                    <td>{{$student->email}}</td>
+                    <td>{{$student->phone}}</td>
+                    <td><img src="/storage/student_images/{{$student->img}}" width="50"></td>
                     <td>
-                            <%= students.status %>
-                        </td>
-                        <td>
-                            <%= students.id %>
-                        </td>
-                        <td>
-                            <%= students.firstName +' '+ students.lastName %>
-                        </td>
-                        <td>
-                            <%= students.department +' '+students.bach%>
-                        </td>
+                    <a href="/student/{{$student->id}}" class="text-center btn  rounded bg-success text-bold">view</a>
+                    <div class="d-flex">
+                        @if(!Auth::guest())
+                    <a href="/student/{{$student->id}}/edit" class="m-1"><i class="fa fa-edit fa-2x bg-warning rounded p-2"></i></a>
 
-                        <td>
-                            <%= students.email %>
-                        </td>
-                        <td>
-                            <%= students.phone %>
-                        </td>
-                        <td>
-                            <img src="../public/uploads/<%= students.img %>" alt="" width="50" height="50">
-                        </td>
-                        <td>
-                            <a href="/student/<%= students._id%>">View</a>
-                        </td>
-                    </tr>
-                    <%  }); %>
+            {!!Form::open(['action' => ['StudentController@destroy', $student->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+                {{Form::hidden('_method', 'DELETE')}}
+                {{Form::submit('Delete', ['class' => 'fa fa-trash fa-2x bg-danger rounded p-2'])}}
+            {!!Form::close()!!}
+    @endif
+                        {{-- <a href="" class="m-1"><i class="fa fa-trash fa-2x bg-danger rounded p-2" aria-hidden="true"></i></a> --}}
+                    </div>
+                    </td>
 
+                </tr>
+                    @endforeach
 
-            </tbody>
-        </table>
-
-
-    </main>
-
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+</div>
 @endsection

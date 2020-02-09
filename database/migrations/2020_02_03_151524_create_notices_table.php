@@ -18,7 +18,10 @@ class CreateNoticesTable extends Migration
             $table->timestamps();
             $table->string('noticeHead');
             $table->string('noticeBody');
-            $table->string('url');
+            $table->string('url1')->nullable();
+            $table->string('url2')->nullable();
+            $table->string('url3')->nullable();
+            $table->string('url4')->nullable();
             $table->string('bach');
         });
     }

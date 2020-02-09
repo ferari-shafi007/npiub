@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Lecture;
+use App\Notice;
+use App\student;
+use App\subject;
+use App\User;
 class HomeController extends Controller
 {
     /**
@@ -21,6 +26,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $user = User::all();
+        $student = student::all();
+        $notice = Notice::all();
+        $lecture = Lecture::all();
+        $subject = subject::all();
+
+        $data = array(
+            'user' => $user,
+            'student' => $student,
+            'notice' => $notice,
+            'lecture' => $lecture,
+            'subject' => $subject,
+        );
+
+        return view('dashboard')->with($data);
     }
 }

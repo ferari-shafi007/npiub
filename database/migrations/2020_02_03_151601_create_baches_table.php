@@ -18,7 +18,7 @@ class CreateBachesTable extends Migration
             $table->timestamps();
             $table->string('bach');
             $table->string('department');
-            $table->string('session');
+            $table->string('session')->nullable();
             $table->string('url');
         });
     }
