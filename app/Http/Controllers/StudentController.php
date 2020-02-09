@@ -6,6 +6,7 @@ use App\Bach;
 use App\student;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -241,6 +242,15 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = student::find($id);
+
+
+        if ($student->img != 'avatar.jpg') {
+            // Delete Image
+            Storage::delete('public/student_images/' . $student->img);
+        }
+
+        $student->delete();
+        return redirect('/student')->with('success', 'student Removed');
     }
 }

@@ -96,7 +96,9 @@
 
             {!!Form::open(['action' => ['StudentController@destroy', $student->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
                 {{Form::hidden('_method', 'DELETE')}}
-                {{Form::submit('Delete', ['class' => 'fa fa-trash fa-2x bg-danger rounded p-2'])}}
+                {{-- {{Form::submit('  ', ['class' => 'fa fa-trash fa-2x bg-danger rounded p-2'])}} --}}
+                <button type="submit" class="bg-danger rounded "><i class="fa fa-trash fa-2x p-2"></i></button>
+                {{-- <i href="{{ route('student.destroy', $student->id) }}" class="m-1"><i class="fa fa-trash fa-2x bg-danger rounded p-2"></i></i> --}}
             {!!Form::close()!!}
     @endif
                         {{-- <a href="" class="m-1"><i class="fa fa-trash fa-2x bg-danger rounded p-2" aria-hidden="true"></i></a> --}}
