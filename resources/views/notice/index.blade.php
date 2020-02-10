@@ -8,12 +8,15 @@
 <h1>Notice</h1>
 </div>
 
-    <table class="notice-table">
+    <table class="notice-table m-5">
         <tr>
             <td>Date</td>
             <td>Bach</td>
             <td>Notice</td>
             <td>File</td>
+        @if(!Auth::guest())
+            <td>Action</td>
+        @endif
         </tr>
 
 @foreach ($notice as $notice)
@@ -34,23 +37,34 @@
                     </p>
                 </td>
                 <td>
-                    {{-- @if(count($notice > 0) --}}
 
-                        <a href=""><img class="notice-icon" src="/res/img/pdf.png" alt=""></a>
-                    {{-- @endif --}}
                    <div></div>
-                    <%if (notice.noticeFile2 != "") { %>
-                        <a href="<%= notice.noticeFile2 %>"><img class="notice-icon" src="/res/img/pdf.png" alt=""></a>
-                        <% } %>
-                    <%if (notice.noticeFile3 != "") { %>
-                        <a href="<%= notice.noticeFile3 %>"><img class="notice-icon" src="/res/img/pdf.png" alt=""></a>
-                        <% } %>
-                    <%if (notice.noticeFile4 != "") { %>
-                        <a href="<%= notice.noticeFile4 %>"><img class="notice-icon" src="/res/img/pdf.png" alt=""></a>
-                        <% } %>
-
+                    @if($notice->url1 == true)
+                <a href="{{$notice->url1}}"><img class="notice-icon" src="/images/pdf.png" alt=""></a>
+                    @endif
+                     @if($notice->url2 == true)
+                <a href="{{$notice->url2}}"><img class="notice-icon" src="/images/pdf.png" alt=""></a>
+                    @endif
+                     @if($notice->url3 == true)
+                <a href="{{$notice->url3}}"><img class="notice-icon" src="/images/pdf.png" alt=""></a>
+                    @endif
+                     @if($notice->url4 == true)
+                <a href="{{$notice->url4}}"><img class="notice-icon" src="/images/pdf.png" alt=""></a>
+                    @endif
 
                 </td>
+        @if(!Auth::guest())
+            <td>
+                <div class="d-flex">
+                    <a href="/notice/{{$notice->id}}/edit" class="m-1"><i class="fa fa-edit fa-2x bg-warning rounded p-2"></i></a>
+
+            {!!Form::open(['action' => ['noticeController@destroy', $notice->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+                {{Form::hidden('_method', 'DELETE')}}
+                <button type="submit" class="bg-danger rounded "><i class="fa fa-trash fa-2x p-2"></i></button>
+            {!!Form::close()!!}
+                </div>
+            </td>
+        @endif
             </tr>
             @endforeach
 

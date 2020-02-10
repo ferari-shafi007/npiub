@@ -18,17 +18,17 @@
 
                     <div class="col-md-3">
                         <label for="validationTooltip02">Department</label>
-                        <select type="search" data-table="studentTable" class="form-control required select-table-filter" name="Department" id="department">
-        <option value="CSE">CSE</option>
-        <option value="EEE">EEE</option>
-    </select>
+                        <select type="search" data-table="studentTable" class="form-control required select-table-filter" name="Department" id="departmentInput" onchange="departmentFunction()">
+                            <option value="CSE">CSE</option>
+                            <option value="EEE">EEE</option>
+                        </select>
 
                     </div>
 
                      <div class="col-md-3">
                         <label for="validationTooltip02">Bach</label>
 
-                        <select class="form-control required" name="bach" id="bach" >
+                        <select class="form-control required" name="bach" id="bachInput" onchange="bachFunction()">
 
                                      @foreach ($bach as $bach)
                         <option value="{{$bach->bach}}">{{$bach->bach}}</option>
@@ -42,10 +42,9 @@
 
                     <div class="col-md-3">
                         <label for="validationTooltip02">Status</label>
-                        <select class="form-control required" name="status" id="status">
-                            <option>ALL</option>
-                            <option>Active</option>
-                            <option>Passed</option>
+                        <select class="form-control required" name="status" id="status" onchange="myFunction()">
+                            <option value="Active">Active</option>
+                            <option value="passed">Passed</option>
                         </select>
 
                     </div>
@@ -67,7 +66,7 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table">
+              <table class="table" id="myTable">
                 <thead class=" text-primary">
                     <th>Status</th>
                     <th>ID</th>
@@ -84,7 +83,7 @@
                 <td>{{$student->status}}</td>
                     <td>{{$student->stdId}}</td>
                     <td>{{$student->firstName}} {{$student->lastName}}</td>
-                    <td>{{$student->department}}</td>
+                    <td>{{$student->department}}  {{$student->bach}}</td>
                     <td>{{$student->email}}</td>
                     <td>{{$student->phone}}</td>
                     <td><img src="/storage/student_images/{{$student->img}}" width="50"></td>
@@ -117,3 +116,74 @@
       </div>
 </div>
 @endsection
+
+
+{{-- search adaption --}}
+
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("status");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+function departmentFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("departmentInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[3];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+function bachFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("bachInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[3];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>

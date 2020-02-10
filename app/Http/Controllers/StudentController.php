@@ -142,7 +142,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $student = student::find($id);
+        $student = student::findOrFail($id);
         $bach = Bach::all();
 
         $data = array(
@@ -160,7 +160,7 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $student = student::find($id);
+        $student = student::findOrFail($id);
         $bach = Bach::all();
 
         $data = array(
@@ -181,7 +181,7 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         // update student by id
-        $student = student::find($id);
+        $student = student::findOrFail($id);
 
         $this->validate($request, [
             'firstName' => 'required',
@@ -242,7 +242,7 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        $student = student::find($id);
+        $student = student::findOrFail($id);
 
 
         if ($student->img != 'avatar.jpg') {

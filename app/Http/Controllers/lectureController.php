@@ -80,15 +80,7 @@ class lectureController extends Controller
         $lecture->subject = $request->input('subject');
         $lecture->semester = $request->input('semester');
 
-            $lecture->save();
-        // return Lecture::create([
-        //     'lecture' => $request['lecture'],
-        //     'catagory' => $request['catagory'],
-        //     'url' => $request['url'],
-        //     'subject' => $request['subject'],
-        //     'semester' => $request['semester'],
-
-        // ]);
+        $lecture->save();
 
         return redirect('/lecture')->with('success', 'lecture Created');
     }
@@ -112,7 +104,16 @@ class lectureController extends Controller
      */
     public function edit($id)
     {
-        //
+        $subject = subject::all();
+        $lecture = Lecture::findOrFail($id);
+        $semester = semester::all();
+        $data = array(
+            'subject' => $subject,
+            'lecture' => $lecture,
+            'semester' => $semester
+        );
+        // return view('lecture.index')->with('lectures', $lecture);
+        return view('lecture.edit')->with($data);
     }
 
     /**
@@ -124,7 +125,25 @@ class lectureController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'lecture' => 'required',
+            'url' => 'required',
+            'subject' => 'required',
+            'catagory' => 'required',
+            'semester' => 'required',
+        ]);
+
+        $lecture = Lecture::findOrFail($id);
+
+        $lecture->lecture = $request->input('lecture');
+        $lecture->catagory = $request->input('catagory');
+        $lecture->url = $request->input('url');
+        $lecture->subject = $request->input('subject');
+        $lecture->semester = $request->input('semester');
+
+        $lecture->save();
+
+        return redirect('/lecture')->with('success', 'lecture updated');
     }
 
     /**
@@ -135,6 +154,9 @@ class lectureController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $lecture = Lecture::findOrFail($id);
+
+        $lecture->delete();
+        return redirect('/lecture')->with('success', 'lecture Removed');
     }
 }

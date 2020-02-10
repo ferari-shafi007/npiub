@@ -52,7 +52,8 @@ class NoticeController extends Controller
     {
         $this->validate($request, [
             'noticeHead' => 'required',
-            'noticeBody' => 'required'
+            'noticeBody' => 'required',
+            'bach' => 'required'
         ]);
 
         $newNotice = new Notice;
@@ -85,7 +86,7 @@ class NoticeController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -96,7 +97,14 @@ class NoticeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bach = Bach::all();
+        $notice = Notice::findOrFail($id);
+        $data = array(
+            'bach' => $bach,
+            'notice' => $notice
+        );
+
+        return view('notice.edit')->with($data);
     }
 
     /**
@@ -108,7 +116,34 @@ class NoticeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $notice =  Notice::findOrFail($id);
+
+        $this->validate($request, [
+            'noticeHead' => 'required',
+            'noticeBody' => 'required',
+            'bach' => 'required'
+        ]);
+
+
+
+
+        $bachData = $request->input('bach');
+
+
+
+        $notice->bach = $bachData;
+        $notice->noticeHead = $request->input('noticeHead');
+        $notice->noticeBody = $request->input('noticeBody');
+        $notice->url1 = $request->input('url1');
+        $notice->url2 = $request->input('url2');
+        $notice->url3 = $request->input('url3');
+        $notice->url4 = $request->input('url4');
+        // $notice->bach = $bachIn;
+
+        $notice->save();
+
+
+        return redirect('/notice')->with('success', 'Notice updated');
     }
 
     /**
@@ -119,7 +154,10 @@ class NoticeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $notice = Notice::findOrFail($id);
+
+        $notice->delete();
+        return redirect('/notice')->with('success', 'notice Removed');
     }
 
 
