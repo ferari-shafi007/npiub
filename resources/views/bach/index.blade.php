@@ -26,11 +26,18 @@
                             {{$bach->department}}
                         </td>
                         <td>
-                            <a class="btn btn-warning" href='/users/edit-bach/<%= bach._id%>'><i
-                                    class="fas fa-edit    "></i> </a>
-                            <a class="btn btn-danger" href='/users/delete-bach/<%= bach._id%>'><i
-                                            class="fas fa-trash"></i> </a>
-                            </form>
+                          @if(!Auth::guest())
+            <td>
+                <div class="d-flex">
+                    {{-- <a href="/bach/{{$bach->id}}/edit" class="m-1"><i class="fa fa-edit fa-2x bg-warning rounded p-2"></i></a> --}}
+
+            {!!Form::open(['action' => ['bachController@destroy', $bach->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+                {{Form::hidden('_method', 'DELETE')}}
+                <button type="submit" class="bg-danger rounded "><i class="fa fa-trash fa-2x p-2"></i></button>
+            {!!Form::close()!!}
+                </div>
+            </td>
+        @endif
                         </td>
 
                 @endforeach

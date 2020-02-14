@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Bach;
+use App\front;
 use Illuminate\Http\Request;
 
-class bachController extends Controller
+class logoController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +14,7 @@ class bachController extends Controller
      */
     public function index()
     {
-        $bach = Bach::all();
-        return view ('bach.index')->with('baches', $bach);
+        //
     }
 
     /**
@@ -41,26 +35,7 @@ class bachController extends Controller
      */
     public function store(Request $request)
     {
-        $bach = Bach::all();
-
-        $this->validate($request, [
-            'bach' => 'required',
-            'department' => 'required',
-            'url' => 'required'
-
-        ]);
-
-        // create a new bach
-        $bach = new Bach;
-
-        $bach->bach = $request->input('bach');
-        $bach->department = $request->input('department');
-        $bach->url = $request->input('url');
-        $bach->session = $request->input('session');
-
-        $bach->save();
-
-        return redirect('/bach')->with('success', 'bach Created');
+        //
     }
 
     /**
@@ -94,7 +69,31 @@ class bachController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $front = front::find($id);
+
+        // Handle File Upload
+        if ($request->hasFile('logo')) {
+            // Get filename with the extension
+            $filenameWithExt = $request->file('logo')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('logo')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            // Upload Image
+            $path = $request->file('logo')->storeAs('public/images', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'logo.png';
+        }
+
+        $front->logo = $fileNameToStore;
+
+        $front->save();
+
+        return redirect('/front/1/edit')->with('success', 'Logo Updated');
+
     }
 
     /**
@@ -105,9 +104,6 @@ class bachController extends Controller
      */
     public function destroy($id)
     {
-        $bach = Bach::findOrFail($id);
-
-        $bach->delete();
-        return redirect('/bach')->with('success', 'bach Removed');
+        //
     }
 }

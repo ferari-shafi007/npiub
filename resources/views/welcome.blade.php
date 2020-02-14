@@ -8,8 +8,8 @@
 
     <div class="container">
       <div class="header-content">
-        <h1>NPI University Of Bangladesh</h1>
-        <p>Department Of Computer Science And Technology</p>
+      <h1>{{$front->head}}</h1>
+        <p>{{$front->tagLine}}</p>
 
         <ul class="list-unstyled list-social">
           <li><a href="<%=general.facebook%>"><i class="ion-social-facebook"></i></a></li>
@@ -34,7 +34,7 @@
         <div class="col-lg-4 ">
           <div class="div-img-bg">
             <div class="about-img">
-              <img src="/storage/npi.png" class="img-responsive" alt="me">
+              <img src="/storage/images/{{$front->aboutImg}}" class="img-responsive" alt="me">
             </div>
           </div>
         </div>
@@ -42,8 +42,8 @@
         <div class="col-lg-7">
           <div class="about-descr">
 
-            <p class="p-heading"><%=general.aboutHeader%></p>
-            <p class="separator"><%=general.aboutText%></p>
+            <p class="p-heading">{{$front->aboutHeader}}</p>
+            <p class="separator">{!!$front->aboutText!!}</p>
 
           </div>
 
@@ -208,17 +208,17 @@
               <h2 class="mb-30">GET IN TOUCH</h2>
 
               <ul class="contact-details">
-                <li><span>Narangai, Manikgonj.</span></li>
-                <li><span>Dhaka</span></li>
-                <li><span>01703-444111</span></li>
-                <li><span>info@npiub.edu.bd</span></li>
+                <li><span>{{$front->address}}</span></li>
+                <li><span>{{$front->city}}</span></li>
+                <li><span>{{$front->phone}}</span></li>
+                <li><span>{{$front->email}}</span></li>
               </ul>
 
             </div>
           </div>
           <div class="col-lg-4">
           <div class="contact-contact">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14594.037359572105!2d90.002796!3d23.871551!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4d40cf17d55306f8!2sNPI%20University%20of%20Bangladesh!5e0!3m2!1sen!2sus!4v1581188255500!5m2!1sen!2sus" height="400" frameborder="0" style="border:0;" allowfullscreen="TRUE"></iframe>
+            <iframe src="{{$front->map}}" height="400" frameborder="0" style="border:0;" allowfullscreen="TRUE"></iframe>
 
           </div>
 

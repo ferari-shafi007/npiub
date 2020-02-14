@@ -182,7 +182,7 @@
       </li>
 
       <li class="nav-item{{ $activePage ?? '' ?? '' == 'icons' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('icons') }}">
+      <a class="nav-link" href="/front/1/edit">
           <i class="material-icons">settings</i>
           <p>General Seting</p>
         </a>

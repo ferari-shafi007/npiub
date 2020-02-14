@@ -106,6 +106,9 @@ class subjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subject = subject::findOrFail($id);
+
+        $subject->delete();
+        return redirect('/subject')->with('success', 'subject Removed');
     }
 }
