@@ -1,6 +1,7 @@
 <?php
 
 use App\front;
+use App\message;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,12 @@ use App\front;
 
 Route::get('/', function () {
     $front = front::find(1);
-    return view('welcome')->with('front', $front);
+    $message = message::orderBy('created_at', 'desc')->paginate(5);
+    $data = array(
+        'message' => $message,
+        'front' => $front
+    );
+    return view('welcome')->with($data);
 });
 
 
@@ -41,6 +47,8 @@ Route::resource('subject', 'subjectController');
 Route::resource('semester', 'semesterController');
 
 Route::resource('front', 'frontController');
+
+Route::resource('message', 'messageController');
 
 Route::put('front/updateLogo/{id}', 'frontController@updateLogo')->name('front.updateLogo');
 Route::put('front/aboutImg/{id}', 'frontController@aboutImg')->name('front.aboutImg');

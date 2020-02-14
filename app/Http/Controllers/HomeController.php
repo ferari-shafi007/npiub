@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Lecture;
+use App\message;
 use App\Notice;
 use App\student;
 use App\subject;
 use App\User;
+
 class HomeController extends Controller
 {
     /**
@@ -31,6 +33,7 @@ class HomeController extends Controller
         $notice = Notice::all();
         $lecture = Lecture::all();
         $subject = subject::all();
+        $message = message::all();
 
         $data = array(
             'user' => $user,
@@ -38,6 +41,7 @@ class HomeController extends Controller
             'notice' => $notice,
             'lecture' => $lecture,
             'subject' => $subject,
+            'message' => $message
         );
 
         return view('dashboard')->with($data);

@@ -122,6 +122,49 @@
           </div>
         </div>
       </div>
+
+      <div class="row">
+
+        <div class="col col-md-12">
+          <div class="card">
+            <div class="card-header card-header-warning">
+              <h4 class="card-title">Message</h4>
+            </div>
+            <div class="card-body table-responsive">
+              <table class="table table-hover">
+                <thead class="text-warning">
+                  <th>Name</th>
+                  <th>Subject</th>
+                  <th>Email</th>
+                  <th>Message</th>
+                  <th>Action</th>
+                </thead>
+                <tbody>
+                    @foreach ($message as $message)
+
+                  <tr>
+                  <td>{{$message->name}}</td>
+                    <td>{{$message->subject}}</td>
+                    <td>{{$message->email}}</td>
+                    <td>{{$message->msgBody}}</td>
+                    <td>
+                        {!!Form::open(['action' => ['messageController@destroy', $message->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+                            {{Form::hidden('_method', 'DELETE')}}
+                            <button type="submit" class="bg-danger rounded "><i class="fa fa-trash fa-2x p-2"></i></button>
+                        {!!Form::close()!!}
+                    </td>
+
+                  </tr>
+                    @endforeach
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </div>
   </div>
 @endsection

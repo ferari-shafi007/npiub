@@ -225,7 +225,7 @@
           </div>
 
           <div class="col-lg-4">
-            <form action="" method="post" role="form" class="contactForm">
+            {!! Form::open(['action' => 'messageController@store', 'method' => 'POST']) !!}
               <div class="row">
 
                 <div id="sendmessage">Your message has been sent. Thank you!</div>
@@ -264,7 +264,7 @@
                 </div>
 
               </div>
-            </form>
+            {!! Form::close() !!}
           </div>
         </div>
       </div>

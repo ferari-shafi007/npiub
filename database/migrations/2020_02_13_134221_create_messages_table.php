@@ -20,7 +20,7 @@ class CreateMessagesTable extends Migration
             $table->string('email');
             $table->string('subject');
             $table->longText('msgBody');
-            $table->string('status');
+            $table->string('status')->nullable();
         });
     }
 
